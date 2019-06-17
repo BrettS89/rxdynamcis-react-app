@@ -1,0 +1,88 @@
+.dashboard-container {
+
+}
+
+.dashboard-header {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.tr-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column-title {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.tr-column {
+  padding-top: 15px;
+  width: 49%;
+  border-radius: 3px;
+}
+
+.transfer-request-card-container {
+  display: flex;
+  padding: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.12), 0 0 2px rgba(0,0,0,0.24);
+  background-color: #fff;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.transfer-card-row {
+  width: 100%;
+}
+
+.transfer-card-top-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.transfer-pharmacy {
+  margin-bottom: 15px;
+}
+
+.transfer-card-title {
+  margin-right: 7px;
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+
+.transfer-card-value {
+  font-weight: 300;
+  margin-bottom: 1px;
+}
+
+.last-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.transfer-card-buttons {
+  display: flex;
+}
+
+.transfer-card-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 85px;
+  border-radius: 4px;
+  background-color: #00758f;
+  color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.transfer-card-button:hover {
+  cursor: pointer;
+}

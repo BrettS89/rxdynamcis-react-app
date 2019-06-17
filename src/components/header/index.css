@@ -1,0 +1,34 @@
+.nav-container {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  background-color: #f80000;
+}
+
+.nav-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 55px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.right-nav {
+  display: flex;
+}
+
+.right-nav-item {
+  margin-left: 20px;
+}
+
+.right-nav-item:hover {
+  cursor: pointer;
+}
+
+.nav-logo {
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-size: 24px;
+}
