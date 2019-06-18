@@ -22,3 +22,8 @@ button {
 a {
   color: #fff!important;
 }
+
+.ui.dimmer
+{
+  background: rgba(0, 0, 0, 0.6) !important;
+}

@@ -1,11 +1,15 @@
 import React from 'react';
 import { RX_BOTTLE } from '../../../assets';
 
-export default function transferRequestCard({ tr, open, claim, cancel, complete }) {
+export default function transferRequestCard({ tr, open, claim, toggleCompleteModal, toggleCancelModal }) {
   const leftBorderColor = open ? '#f0f0f0' : '#bde6ee';
 
   const displayDate = () => {
-    return new Date(tr.dateCreated).toString().split(' ').slice(0, 5).join(' ');
+    return new Date(tr.dateCreated)
+      .toString()
+      .split(' ')
+      .slice(0, 5)
+      .join(' ');
   };
 
   const displayDrugs = () => {
@@ -24,7 +28,7 @@ export default function transferRequestCard({ tr, open, claim, cancel, complete 
         <div
           className="transfer-card-button"
           style={{ backgroundColor: '#f0f0f0', color: "#212121", marginRight: 10 }}
-          onClick={() => cancel({ id: tr._id })}
+          onClick={() => toggleCancelModal(tr._id)}
           >
           Cancel
         </div>
@@ -35,21 +39,24 @@ export default function transferRequestCard({ tr, open, claim, cancel, complete 
   const displayClaimOrComplete = () => {
     if (open) {
       return <div className="transfer-card-button" onClick={() => claim({ id: tr._id })}>Claim</div>;
-    } 
-    return <div className="transfer-card-button" onClick={() => complete({ id: tr._id })}>Complete</div>;
+    }
+    return <div className="transfer-card-button" onClick={() => toggleCompleteModal(tr._id)}>Complete</div>;
   };
 
   return (
-    <div className="transfer-request-card-container" style={{ borderLeft: `30px solid ${leftBorderColor}` }}>
+    <div 
+      className="transfer-request-card-container"
+      style={{ borderLeft: `30px solid ${leftBorderColor}` }}
+    >
       <div className="transfer-card-row">
         <div className="transfer-card-top-row">
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img src={RX_BOTTLE} style={{ height: 23, marginRight: 7 }} />
             <div style={{ fontSize: 15 }}>{tr._id}</div>
           </div>
-          
           <div>{displayDate()}</div>
         </div>
+
         <div className="transfer-pharmacy">
           <div className="transfer-card-title">Transfer from</div>
           <div className="transfer-card-value">
@@ -77,12 +84,10 @@ export default function transferRequestCard({ tr, open, claim, cancel, complete 
         </div>
 
         <div className="last-row">
-
           <div className="transfer-pharmacy">
             <div className="transfer-card-title">Prescriptions</div>
             {displayDrugs()}
           </div>
-
           <div className="transfer-card-buttons">
             {displayCancelButton()}
             {displayClaimOrComplete()}

@@ -1,4 +1,6 @@
 import React from 'react';
+import CompleteModal from './sub-components/completeModal';
+import CancelModal from './sub-components/cancelModal';
 
 export default function dashboard(props) {
   return (
@@ -11,9 +13,18 @@ export default function dashboard(props) {
         <div className="tr-column">
           <div className="column-title">Claimed transfers</div>
           {props.displayMyTransferRequests()}
-          {/* <TransferRequestCard claimed /> */}
         </div>
       </div>
+      <CompleteModal
+        completeModal={props.completeModal}
+        toggleCompleteModal={props.toggleCompleteModal}
+        complete={props.complete}
+      />
+      <CancelModal
+        cancelModal={props.cancelModal}
+        toggleCancelModal={props.toggleCancelModal}
+        cancel={props.cancel}
+      />
     </div>
   );
 }

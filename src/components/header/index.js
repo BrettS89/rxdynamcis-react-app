@@ -6,7 +6,9 @@ class Header extends React.Component {
 
   render() {
     return (
-      <HeaderView />
+      <HeaderView
+        screen={this.props.state.screen}
+      />
     );
   }
 }

@@ -4,7 +4,8 @@ import LoginView from './view';
 
 class Login extends React.Component {
   componentDidMount() {
-    this.props.actions.onLogout()
+    this.props.actions.onLogout();
+    this.props.actions.setScreen('login');
   }
   
   onLogin = e => {

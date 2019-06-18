@@ -3,6 +3,7 @@ import {
 } from 'redux-saga/effects';
 import { apiGetOpenTransferRequests, apiGetMyTransferRequests, apiClaimTransferRequest, apiCancelTransferRequest, apiCompleteTransferRequest } from '../../lib/apiCalls';
 import * as actionTypes from '../actions/actionTypes';
+import * as appActions from '../actions/app';
 import * as transferRequestActions from '../actions/transferRequests';
 
 export default [
@@ -50,52 +51,64 @@ function * openTransferRequestsHandler() {
 
 function * myTransferRequestsHandler() {
   try {
+    yield put(appActions.isLoading());
     const { data: { myTransferRequests } } =
     yield call(apiGetMyTransferRequests);
 
   yield put(transferRequestActions.setMyTransferRequests(
     myTransferRequests
   ));
+  yield put(appActions.isNotLoading());
   } catch(e) {
+    yield put(appActions.isNotLoading());
     console.log('myTransferRequestsHandler error: ', e);
   }
 }
 
 function * claimTransferRequestHandler({ payload }) {
   try {
+    yield put(appActions.isLoading());
     const { data: { myTransferRequests } } =
       yield call(apiClaimTransferRequest, payload);
     
     yield put(transferRequestActions.setMyTransferRequests(
       myTransferRequests
     ));
+    yield put(appActions.isNotLoading());
   } catch(e) {
+    yield put(appActions.isNotLoading());
     console.log('claimTransferRequestHandler error: ', e);
   }
 }
 
 function * cancelTransferRequestHandler({ payload }) {
   try {
+    yield put(appActions.isLoading());
     const { data: { myTransferRequests } } =
       yield call(apiCancelTransferRequest, payload);
     
     yield put(transferRequestActions.setMyTransferRequests(
       myTransferRequests
     ));
+    yield put(appActions.isNotLoading());
   } catch(e) {
+    yield put(appActions.isNotLoading());
     console.log('cancelTransferRequestHandler error: ', e);
   }
 }
 
 function * completeTransferRequestHandler({ payload }) {
   try {
+    yield put(appActions.isLoading());
     const { data: { myTransferRequests } } =
     yield call(apiCompleteTransferRequest, payload);
 
     yield put(transferRequestActions.setMyTransferRequests(
       myTransferRequests
     ));
+    yield put(appActions.isNotLoading());
   } catch(e) {
+    yield put(appActions.isNotLoading());
     console.log('cancelTransferRequestHandler error: ', e);
   }  
 }

@@ -86,3 +86,31 @@
 .transfer-card-button:hover {
   cursor: pointer;
 }
+
+.action-modal {
+  background-color: transparent!important;
+  padding: 0!important;
+  margin: 0!important;
+  height: auto!important;
+  width: auto!important;
+  -webkit-box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  box-shadow: none!important;
+}
+
+.action-modal-container {
+  display: flex!important;
+  flex-direction: column!important;
+  align-items: center!important;
+  justify-content: center!important;
+}
+
+.modal-title {
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+}

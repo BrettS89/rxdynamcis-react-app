@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
+import Spinner from '../components/spinner';
 import Header from '../containers/header';
 import Dashboard from '../containers/dashboard';
 import Login from '../containers/login';
@@ -16,6 +17,7 @@ export default () => {
             <Route path="/login" component={Login} />
             <Route path="/" component={Dashboard} />
           </Switch>
+          <Spinner />
         </div>
       </React.Fragment>
     </BrowserRouter>

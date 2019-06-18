@@ -12,8 +12,8 @@ export default function login({ onLogin }) {
           <hr/>
         </div>
         <div className="login-inputs">
-          <Input style={{ marginBottom: 20 }} name="email" placeholder="Email address" />
-          <Input name="password" placeholder="Password" />
+          <Input style={{ marginBottom: 20 }} name="email" placeholder="Email address" type="email" />
+          <Input name="password" placeholder="Password" type="password" />
         </div>
 
         <button className="login-button">

@@ -4,6 +4,7 @@ import {
 } from 'redux-saga/effects';
 import { apiLogin } from '../../lib/apiCalls';
 import * as actionTypes from '../actions/actionTypes';
+import * as appActions from '../actions/app';
 import * as authActions from '../actions/auth';
 
 export default [
@@ -21,10 +22,13 @@ function * logoutWatcher() {
 
 function * loginHandler({ payload: { form, navigate } }) {
   try {
+    yield put(appActions.isLoading());
     const { data: { token } } = yield call(apiLogin, form);
     localStorage.setItem('token', token);
     navigate();
+    yield put(appActions.isNotLoading());
   } catch(e) {
+    yield put(appActions.isNotLoading());
     console.log('loginHandler error: ', e);
   }
 }

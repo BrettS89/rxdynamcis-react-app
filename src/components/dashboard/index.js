@@ -8,15 +8,19 @@ import './index.css';
 class Dashboard extends React.Component {
   state = {
     socket: io.connect(URI),
-  }
+    openCompleteModal: false,
+    openCancelModal: false,
+    transferId: null,
+  };
 
   componentDidMount() {
+    this.props.actions.setScreen('dashboard');
     this.props.actions.getOpenTransferRequests();
     this.props.actions.getMyTransferRequests();
     this.initSocket();
   }
 
-  async componentWillUnmount() {
+  componentWillUnmount() {
     this.state.socket.disconnect();
   }
 
@@ -44,8 +48,34 @@ class Dashboard extends React.Component {
                 key={t._id} 
                 cancel={this.props.actions.cancelTransferRequest}
                 complete={this.props.actions.completeTransferRequest}
+                toggleCompleteModal={this.toggleCompleteModal}
+                toggleCancelModal={this.toggleCancelModal}
               />
     });
+  };
+
+  toggleCompleteModal = transferId => {
+    this.setState({
+      openCompleteModal: !this.state.openCompleteModal,
+      transferId,
+     });
+  };
+
+  toggleCancelModal = transferId => {
+    this.setState({
+      openCancelModal: !this.state.openCancelModal,
+      transferId,
+     });
+  };
+
+  complete = () => {
+    this.props.actions.completeTransferRequest({ id: this.state.transferId });
+    this.setState({ transferId: null, openCompleteModal: false });
+  };
+
+  cancel = () => {
+    this.props.actions.cancelTransferRequest({ id: this.state.transferId });
+    this.setState({ transferId: null, openCancelModal: false });
   };
 
   render() {
@@ -53,6 +83,13 @@ class Dashboard extends React.Component {
       <DashboardView
         displayOpenTransferRequests={this.displayOpenTransferRequests}
         displayMyTransferRequests={this.displayMyTransferRequests}
+        completeModal={this.state.openCompleteModal}
+        cancelModal={this.state.openCancelModal}
+        complete={this.complete}
+        cancel={this.cancel}
+        toggleCompleteModal={this.toggleCompleteModal}
+        toggleCancelModal={this.toggleCancelModal}
+        transferId={this.state.transferId}
       />
     );
   }
