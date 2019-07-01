@@ -2,7 +2,6 @@ import React from 'react';
 import { Modal } from 'semantic-ui-react';
 
 export default function cancelModal(props) {
-  console.log(props.cancelModal);
   return (
     <Modal open={props.cancelModal} className="action-modal">
       <Modal.Content className="action-modal-container">

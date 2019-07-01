@@ -7,10 +7,10 @@ export default function HeaderView(props) {
       return (
         <div className="right-nav">
           <div className="right-nav-item">
-          <Link to="/dashboard">Open Requests</Link>
+            <Link to="/dashboard">Open Requests</Link>
           </div>
           <div className="right-nav-item">
-            Transfer history
+            <Link to="/history">Transfer history</Link>
           </div>
           <div className="right-nav-item">
             <Link to="/login">Log out</Link>

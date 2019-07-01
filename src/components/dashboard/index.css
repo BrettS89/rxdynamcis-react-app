@@ -87,6 +87,10 @@
   cursor: pointer;
 }
 
+.rx-details {
+  margin-top: 20px;
+}
+
 .action-modal {
   background-color: transparent!important;
   padding: 0!important;

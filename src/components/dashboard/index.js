@@ -22,6 +22,7 @@ class Dashboard extends React.Component {
 
   componentWillUnmount() {
     this.state.socket.disconnect();
+    this.props.actions.setRxDetails(null);
   }
 
   initSocket = () => { 
@@ -32,25 +33,32 @@ class Dashboard extends React.Component {
 
   displayOpenTransferRequests = () => {
     return this.props.state.openTransferRequests.map(t => {
-      return <TransferRequestCard 
-                open 
-                tr={t}
-                key={t._id} 
-                claim={this.props.actions.claimTransferRequest}
-              />
+      return (
+        <TransferRequestCard 
+          open 
+          tr={t}
+          key={t._id}
+          claim={this.props.actions.claimTransferRequest}
+        />
+      );
     });
   };
 
   displayMyTransferRequests = () => {
     return this.props.state.myTransferRequests.map(t => {
-      return <TransferRequestCard
-                claimed tr={t}
-                key={t._id} 
-                cancel={this.props.actions.cancelTransferRequest}
-                complete={this.props.actions.completeTransferRequest}
-                toggleCompleteModal={this.toggleCompleteModal}
-                toggleCancelModal={this.toggleCancelModal}
-              />
+      return (
+        <TransferRequestCard
+          claimed
+          tr={t}
+          key={t._id}
+          rxDetails={this.props.state.rxDetails}
+          getRxDetails={this.props.actions.getRxDetails}
+          cancel={this.props.actions.cancelTransferRequest}
+          complete={this.props.actions.completeTransferRequest}
+          toggleCompleteModal={this.toggleCompleteModal}
+          toggleCancelModal={this.toggleCancelModal}
+        />
+      );
     });
   };
 
@@ -71,11 +79,13 @@ class Dashboard extends React.Component {
   complete = () => {
     this.props.actions.completeTransferRequest({ id: this.state.transferId });
     this.setState({ transferId: null, openCompleteModal: false });
+    this.props.actions.setRxDetails(null);
   };
 
   cancel = () => {
     this.props.actions.cancelTransferRequest({ id: this.state.transferId });
     this.setState({ transferId: null, openCancelModal: false });
+    this.props.actions.setRxDetails(null);
   };
 
   render() {

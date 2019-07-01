@@ -1,8 +1,9 @@
-import { SET_LOADING, SET_SCREEN } from '../actions/actionTypes';
+import { SET_LOADING, SET_SCREEN, SET_ERROR } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   isLoading: false,
   screen: null,
+  isError: false,
 };
 
 export default function(state = INITIAL_STATE, { type, payload }) {
@@ -18,7 +19,13 @@ export default function(state = INITIAL_STATE, { type, payload }) {
       return {
         ...state,
         screen: payload,
-      }
+      };
+
+    case SET_ERROR:
+      return {
+        ...state,
+        isError: payload,
+      };
 
     default:
       return state;

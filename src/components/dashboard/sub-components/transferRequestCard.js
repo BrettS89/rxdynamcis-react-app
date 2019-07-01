@@ -1,25 +1,14 @@
 import React from 'react';
 import { RX_BOTTLE } from '../../../assets';
 
-export default function transferRequestCard({ tr, open, claim, toggleCompleteModal, toggleCancelModal }) {
+export default function transferRequestCard({ tr, open, claim, toggleCompleteModal, toggleCancelModal, getRxDetails, rxDetails }) {
   const leftBorderColor = open ? '#f0f0f0' : '#bde6ee';
-
   const displayDate = () => {
     return new Date(tr.dateCreated)
       .toString()
       .split(' ')
       .slice(0, 5)
       .join(' ');
-  };
-
-  const displayDrugs = () => {
-    return tr.drugs.map(d => {
-      return (
-        <div className="transfer-card-value" key={d}>
-          {d}
-        </div>
-      );
-    });
   };
 
   const displayCancelButton = () => {
@@ -29,8 +18,22 @@ export default function transferRequestCard({ tr, open, claim, toggleCompleteMod
           className="transfer-card-button"
           style={{ backgroundColor: '#f0f0f0', color: "#212121", marginRight: 10 }}
           onClick={() => toggleCancelModal(tr._id)}
-          >
+        >
           Cancel
+        </div>
+      );
+    }
+  };
+
+  const displayRxDetailsButton = () => {
+    if (!open) {
+      return (
+        <div
+          className="transfer-card-button"
+          style={{ backgroundColor: '#f0f0f0', color: "#212121", marginRight: 10 }}
+          onClick={() => getRxDetails(tr._id)}
+        >
+          Details
         </div>
       );
     }
@@ -43,8 +46,39 @@ export default function transferRequestCard({ tr, open, claim, toggleCompleteMod
     return <div className="transfer-card-button" onClick={() => toggleCompleteModal(tr._id)}>Complete</div>;
   };
 
+  const displayRxDetails = () => {
+    if (!!rxDetails) {
+      return (
+        <React.Fragment>
+          <div className="rx-details">
+            <div className="transfer-card-title">Member details</div>
+            <div className="transfer-card-value">
+              {`${rxDetails.firstName} ${rxDetails.lastName}`}
+            </div>
+            <div className="transfer-card-value">
+              {rxDetails.dob}
+            </div>
+            <div className="transfer-card-value">
+              {rxDetails.address}
+            </div>
+            <div className="transfer-card-value">
+              {rxDetails.phone}
+            </div>
+          </div>
+
+          <div className="rx-details">
+            <div className="transfer-card-title">Rx details</div>
+
+            {rxDetails.drugs.map(d => <div className="transfer-card-value" key={d.drugName}>{`${d.drugName} ${d.drugStrength}`}</div>)}
+
+          </div>
+        </React.Fragment>
+      );
+    }
+  };
+
   return (
-    <div 
+    <div
       className="transfer-request-card-container"
       style={{ borderLeft: `30px solid ${leftBorderColor}` }}
     >
@@ -85,14 +119,17 @@ export default function transferRequestCard({ tr, open, claim, toggleCompleteMod
 
         <div className="last-row">
           <div className="transfer-pharmacy">
-            <div className="transfer-card-title">Prescriptions</div>
-            {displayDrugs()}
           </div>
+
           <div className="transfer-card-buttons">
             {displayCancelButton()}
+            {displayRxDetailsButton()}
             {displayClaimOrComplete()}
           </div>
         </div>
+        
+        {displayRxDetails()}
+
       </div>
     </div>
   );

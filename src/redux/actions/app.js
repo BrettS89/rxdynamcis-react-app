@@ -1,4 +1,4 @@
-import { SET_LOADING, SET_SCREEN } from './actionTypes';
+import { SET_LOADING, SET_SCREEN, SET_ERROR } from './actionTypes';
 
 export const setScreen = payload => ({
   type: SET_SCREEN,
@@ -12,5 +12,15 @@ export const isLoading = () => ({
 
 export const isNotLoading = () => ({
   type: SET_LOADING,
+  payload: false,
+});
+
+export const setIsError = () => ({
+  type: SET_ERROR,
+  payload: true,
+});
+
+export const setIsNotError = () => ({
+  type: SET_ERROR,
   payload: false,
 });

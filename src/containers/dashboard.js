@@ -20,6 +20,7 @@ function mapStateToProps({ transferRequests }) {
     state: {
       openTransferRequests: transferRequests.openTransferRequests,
       myTransferRequests: transferRequests.myTransferRequests,
+      rxDetails: transferRequests.rxDetails,
     },
   };
 }

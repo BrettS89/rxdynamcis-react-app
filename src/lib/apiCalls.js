@@ -33,6 +33,13 @@ export const apiCancelTransferRequest = async body => {
 };
 
 export const apiCompleteTransferRequest = async body => {
-  console.log(body);
   return await axios.post(`${URI}/transferrequest/complete`, body, getToken());
+};
+
+export const apiGetRxDetails = async tr => {
+  return await axios.get(`${URI}/pbm/rxdetails/${tr}`, getToken());
+};
+
+export const apiGetTrReport = async body => {
+  return await axios.post(`${URI}/transferrequest/history`, body, getToken());
 };

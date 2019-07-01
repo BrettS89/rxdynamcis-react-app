@@ -3,11 +3,13 @@ import './index.css';
 import LoginView from './view';
 
 class Login extends React.Component {
+  
   componentDidMount() {
+    this.props.actions.setIsNotError();
     this.props.actions.onLogout();
     this.props.actions.setScreen('login');
   }
-  
+
   onLogin = e => {
     e.preventDefault();
     this.props.actions.login({
